@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbershop Jaselská | Váš dokonalý střih v Dejvicích</title>
+    <meta name="description" content="Profesionální barbershop v Dejvicích. Moderní střihy, péče o vousy a tradiční holení. Rezervujte si termín online.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C5A028',
+                            600: '#B08D1E',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#121212',
+                            700: '#1a1a1a',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        /* Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #F4E5C2 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Hover Effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Image Overlay */
+        .image-overlay {
+            background: linear-gradient(to bottom, rgba(10,10,10,0.3), rgba(10,10,10,0.8));
+        }
+        
+        /* Navigation Blur */
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* FAQ Accordion */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-content.active {
+            max-height: 500px;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-300 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-dark-900/90 nav-blur border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center justify-center w-full md:w-auto absolute md:relative left-0 pointer-events-none md:pointer-events-auto">
+                    <a href="#" class="text-2xl font-serif font-bold text-gold-gradient tracking-wider pointer-events-auto">
+                        BARBERSHOP JASELSKÁ
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-300 hover:text-gold-400 transition-colors duration-300 text-sm uppercase tracking-widest">O nás</a>
+                    <a href="#services" class="text-gray-300 hover:text-gold-400 transition-colors duration-300 text-sm uppercase tracking-widest">Služby</a>
+                    <a href="#booking" class="text-gray-300 hover:text-gold-400 transition-colors duration-300 text-sm uppercase tracking-widest">Rezervace</a>
+                    <a href="#contact" class="text-gray-300 hover:text-gold-400 transition-colors duration-300 text-sm uppercase tracking-widest">Kontakt</a>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-gold-400 transition-colors duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold-400 transition-colors duration-300">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center absolute right-4">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-gold-400 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-800 border-t border-white/5">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-gold-400 hover:bg-dark-700 rounded-md">O nás</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-gold-400 hover:bg-dark-700 rounded-md">Služby</a>
+                <a href="#booking" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-gold-400 hover:bg-dark-700 rounded-md">Rezervace</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-gold-400 hover:bg-dark-700 rounded-md">Kontakt</a>
+                <div class="flex space-x-4 px-3 py-2">
+                    <a href="#" class="text-gray-400 hover:text-gold-400"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gold-400"><i class="fab fa-facebook text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80" 
+                 alt="Barbershop Interior" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 image-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 animate-fade-in-up">
+                Váš dokonalý střih<br>
+                <span class="text-gold-gradient">v srdci Dejvic</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 font-light max-w-2xl mx-auto animate-fade-in-up delay-100">
+                Přijďte si pro moderní střih, kvalitní služby a pohodlné prostředí
+            </p>
+            <div class="animate-fade-in-up delay-200">
+                <a href="#booking" class="inline-block bg-gradient-to-r from-gold-600 to-gold-400 text-dark-900 font-semibold py-4 px-10 rounded-sm hover:from-gold-400 hover:to-gold-600 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-gold-500/20">
+                    Rezervujte si termín
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gold-400 text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-dark-800 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-400/30 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div class="order-2 lg:order-1">
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+                        Kdo <span class="text-gold-gradient">jsme</span>
+                    </h2>
+                    <div class="w-20 h-1 bg-gold-400 mb-8"></div>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        V Barbershopu Jaselská věříme, že dokonalý střih není jen o vzhledu – je o pocitu. Náš tým tří zkušených holičů kombinuje tradiční řemeslo s moderními trendy, aby každý klient odcházel nejen skvěle vypadající, ale i sebevědomý.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Vytvořili jsme prostor, kde se můžete zastavit, odpočinout si a nechat se hýčkat. Atmosféra starého dobrého barbershopu se snoubí s moderním přístupem k péči o muže. Používáme pouze prémiové produkty a nástroje, protože vaše spokojenost je naší prioritou.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-serif font-bold text-gold-400 mb-2">10+</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Let zkušeností</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-serif font-bold text-gold-400 mb-2">3</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Mistři holiči</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-serif font-bold text-gold-400 mb-2">5000+</div>
+                            <div class="text-sm text-gray-500 uppercase tracking-wider">Spokojených klientů</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Grid -->
+                <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
+                    <div class="space-y-4 mt-8">
+                        <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Barber at work" 
+                             class="w-full h-64 object-cover rounded-sm shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Barbershop tools" 
+                             class="w-full h-48 object-cover rounded-sm shadow-xl hover-lift">
+                    </div>
+                    <div class="space-y-4">
+                        <img src="https://images.unsplash.com/photo-1599351431202-6e0c0b8e8b5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Team member" 
+                             class="w-full h-48 object-cover rounded-sm shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Haircut detail" 
+                             class="w-full h-64 object-cover rounded-sm shadow-xl hover-lift">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-dark-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
+                    Naše <span class="text-gold-gradient">služby</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Pánské střihy, holení vousů a mnoho dalších služeb, které si zamilujete
+                </p>
+                <div class="w-20 h-1 bg-gold-400 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-dark-800 p-8 rounded-sm border border-white/5 hover:border-gold-400/30 transition-all duration-300 hover-lift group">
+                    <div class="w-16 h-16 bg-dark-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-400/10 transition-colors">
+                        <i class="fas fa-cut text-2xl text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3">Klasický střih</h3>
+                    <p class="text-gray-400 mb-4">Precizní střih strojkem a nůžkami včetně mytí hlavy a stylingu.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-gold-400 font-bold text-xl">450 Kč</span>
+                        <span class="text-gray-500 text-sm">45 min</span>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-dark-800 p-8 rounded-sm border border-white/5 hover:border-gold-400/30 transition-all duration-300 hover-lift group">
+                    <div class="w-16 h-16 bg-dark-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-400/10 transition-colors">
+                        <i class="fas fa-razor text-2xl text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3">Holení břitvou</h3>
+                    <p class="text-gray-400 mb-4">Tradiční holení horkým ručníkem a ostrou břitvou s péčí o pokožku.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-gold-400 font-bold text-xl">350 Kč</span>
+                        <span class="text-gray-500 text-sm">30 min</span>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-dark-800 p-8 rounded-sm border border-white/5 hover:border-gold-400/30 transition-all duration-300 hover-lift group">
+                    <div class="w-16 h-16 bg-dark-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-400/10 transition-colors">
+                        <i class="fas fa-user-tie text-2xl text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3">Střih & Holení</h3>
+                    <p class="text-gray-400 mb-4">Kompletní balíček péče – střih vlasů a úprava vousů nebo holení.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-gold-400 font-bold text-xl">750 Kč</span>
+                        <span class="text-gray-500 text-sm">75 min</span>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-dark-800 p-8 rounded-sm border border-white/5 hover:border-gold-400/30 transition-all duration-300 hover-lift group">
+                    <div class="w-16 h-16 bg-dark-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-400/10 transition-colors">
+                        <i class="fas fa-brush text-2xl text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3">Úprava vousů</h3>
+                    <p class="text-gray-400 mb-4">Tvarování a zastřihování vousů, úprava kontur a péče o vousy.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-gold-400 font-bold text-xl">250 Kč</span>
+                        <span class="text-gray-500 text-sm">20 min</span>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-dark-800 p-8 rounded-sm border border-white/5 hover:border-gold-400/30 transition-all duration-300 hover-lift group">
+                    <div class="w-16 h-16 bg-dark-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-400/10 transition-colors">
+                        <i class="fas fa-child text-2xl text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3">Dětský střih</h3>
+                    <p class="text-gray-400 mb-4">Šetrný přístup k nejmenším klientům, trpělivost a zkušenost s dětmi.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-gold-400 font-bold text-xl">350 Kč</span>
+                        <span class="text-gray-500 text-sm">30 min</span>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-dark-800 p-8 rounded-sm border border-white/5 hover:border-gold-400/30 transition-all duration-300 hover-lift group">
+                    <div class="w-16 h-16 bg-dark-700 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold-400/10 transition-colors">
+                        <i class="fas fa-spa text-2xl text-gold-400"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-3">Kompletní péče</h3>
+                    <p class="text-gray-400 mb-4">Luxusní balíček: střih, holení, úprava vousů a péče o obličej.</p>
+                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                        <span class="text-gold-400 font-bold text-xl">990 Kč</span>
+                        <span class="text-gray-500 text-sm">90 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#booking" class="inline-block border-2 border-gold-400 text-gold-400 font-semibold py-3 px-8 rounded-sm hover:bg-gold-400 hover:text-dark-900 transition-all duration-300">
+                    Zjistit více a rezervovat
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-dark-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
+                    Časté <span class="text-gold-gradient">dotazy</span>
+                </h2>
+                <div class="w-20 h-1 bg-gold-400 mx-auto mt-6"></div>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-dark-900 rounded-sm border border-white/5 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-lg font-medium text-white">Musím se objednat předem?</span>
+                        <i class="fas fa-chevron-down text-gold-400 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-400">Doporučujeme rezervaci předem, abychom vám zajistili vámi preferovaný termín. Akceptujeme i walk-in klienty, ale pouze pokud máme volné místo. Nejrychlejší je online rezervace přes náš web.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-dark-900 rounded-sm border border-white/5 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-lg font-medium text-white">Jak se mám připravit na návštěvu?</span>
+                        <i class="fas fa-chevron-down text-gold-400 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-400">Přijďte s čistými vlasy (pokud možno) a s představou o tom, co chcete. Pokud máte specifické přání, přineste fotografii. Doporučujeme přijít 5-10 minut předem, abyste se mohli uvolnit a vychutnat atmosféru.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-dark-900 rounded-sm border border-white/5 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-lg font-medium text-white">Jaké produkty používáte?</span>
+                        <i class="fas fa-chevron-down text-gold-400 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-400">Používáme prémiové produkty od značek jako American Crew, Uppercut Deluxe a Reuzel. Všechny produkty jsou pečlivě vybírány pro kvalitu a výsledný efekt. Po střihu vám rádi poradíme s domácí péčí.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-dark-900 rounded-sm border border-white/5 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-lg font-medium text-white">Jaké jsou možnosti platby?</span>
+                        <i class="fas fa-chevron-down text-gold-400 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-400">Přijímáme hotovost, platební karty i bezkontaktní platby mobilem (Apple Pay, Google Pay). Dárkové poukazy jsou také k dispozici přímo v barbershopu nebo online.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="bg-dark-900 rounded-sm border border-white/5 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="text-lg font-medium text-white">Jak často bych měl chodit na střih?</span>
+                        <i class="fas fa-chevron-down text-gold-400 faq-icon"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-400">Pro udržení tvaru doporučujeme návštěvu každé 3-4 týdny. Pokud udržujete krátký střih nebo fade, ideálně každé 2 týdny. Úprava vousů se doporučuje každý týden pro dokonalý vzhled.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-24 bg-dark-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Background pattern" 
+                 class="w-full h-full object-cover">
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-dark-800 rounded-sm shadow-2xl p-8 md:p-12 border border-white/5">
+                <div class="text-center mb-10">
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
+                        Rezervujte si <span class="text-gold-gradient">svůj termín</span>
+                    </h2>
+                    <p class="text-gray-400">Vyberte si ideální čas a termín pro Vaši návštěvu</p>
+                </div>
+
+                <form id="booking-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Jméno a příjmení *</label>
+                            <input type="text" required 
+                                   class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors"
+                                   placeholder="Jan Novák">
+                        </div>
+
+                        <!-- Phone -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Telefon *</label>
+                            <input type="tel" required 
+                                   class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors"
+                                   placeholder="+420 123 456 789">
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Email *</label>
+                        <input type="email" required 
+                               class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors"
+                               placeholder="jan@example.cz">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Service Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Služba *</label>
+                            <select required 
+                                    class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors">
+                                <option value="">Vyberte službu...</option>
+                                <option value="classic">Klasický střih (450 Kč)</option>
+                                <option value="shave">Holení břitvou (350 Kč)</option>
+                                <option value="combo">Střih & Holení (750 Kč)</option>
+                                <option value="beard">Úprava vousů (250 Kč)</option>
+                                <option value="kids">Dětský střih (350 Kč)</option>
+                                <option value="full">Kompletní péče (990 Kč)</option>
+                            </select>
+                        </div>
+
+                        <!-- Barber Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Preferovaný holič</label>
+                            <select 
+                                    class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors">
+                                <option value="">Bez preference...</option>
+                                <option value="milan">Milan</option>
+                                <option value="tomas">Tomáš</option>
+                                <option value="david">David</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Date -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Datum *</label>
+                            <input type="date" required 
+                                   class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors">
+                        </div>
+
+                        <!-- Time -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Čas *</label>
+                            <select required 
+                                    class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors">
+                                <option value="">Vyberte čas...</option>
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Poznámka</label>
+                        <textarea rows="3" 
+                                  class="w-full bg-dark-900 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors"
+                                  placeholder="Speciální požadavky, alergie nebo preference..."></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                            class="w-full bg-gradient-to-r from-gold-600 to-gold-400 text-dark-900 font-bold py-4 rounded-sm hover:from-gold-400 hover:to-gold-600 transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-gold-500/20">
+                        Potvrdit rezervaci
+                    </button>
+
+                    <p class="text-center text-sm text-gray-500 mt-4">
+                        * Po odeslání rezervace vám přijde potvrzovací email. Rezervaci lze zdarma zrušit do 24 hodin před termínem.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-dark-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
+                    Kontaktujte <span class="text-gold-gradient">nás</span>
+                </h2>
+                <div class="w-20 h-1 bg-gold-400 mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info & Form -->
+                <div class="space-y-8">
+                    <!-- Contact Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-dark-900 p-6 rounded-sm border border-white/5">
+                            <div class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-map-marker-alt text-gold-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-white font-bold mb-2">Adresa</h3>
+                            <p class="text-gray-400">Jaselská 15<br>160 00 Praha 6 – Dejvice</p>
+                        </div>
+
+                        <div class="bg-dark-900 p-6 rounded-sm border border-white/5">
+                            <div class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-phone text-gold-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-white font-bold mb-2">Telefon</h3>
+                            <p class="text-gray-400">+420 123 456 789<br>Po–Pá: 9:00–19:00</p>
+                        </div>
+
+                        <div class="bg-dark-900 p-6 rounded-sm border border-white/5">
+                            <div class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-envelope text-gold-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-white font-bold mb-2">Email</h3>
+                            <p class="text-gray-400">info@jaselska-barber.cz<br>rezervace@jaselska-barber.cz</p>
+                        </div>
+
+                        <div class="bg-dark-900 p-6 rounded-sm border border-white/5">
+                            <div class="w-12 h-12 bg-dark-700 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-clock text-gold-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-white font-bold mb-2">Otevírací doba</h3>
+                            <p class="text-gray-400">Po–Pá: 9:00–19:00<br>So: 9:00–14:00</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Contact Form -->
+                    <div class="bg-dark-900 p-8 rounded-sm border border-white/5">
+                        <h3 class="font-serif text-2xl font-bold text-white mb-6">Rychlý dotaz</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <input type="text" placeholder="Vaše jméno" 
+                                       class="w-full bg-dark-800 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors">
+                            </div>
+                            <div>
+                                <input type="email" placeholder="Váš email" 
+                                       class="w-full bg-dark-800 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors">
+                            </div>
+                            <div>
+                                <textarea rows="3" placeholder="Vaše zpráva..." 
+                                          class="w-full bg-dark-800 border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-gold-400 transition-colors"></textarea>
+                            </div>
+                            <button type="submit" 
+                                    class="w-full bg-gold-400 text-dark-900 font-bold py-3 rounded-sm hover:bg-gold-500 transition-colors">
+                                Odeslat zprávu
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="h-full min-h-[400px] bg-dark-900 rounded-sm overflow-hidden border border-white/5 relative">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.7757626672!2d14.3875!3d50.1008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA2JzAzLjAiTiAxNMKwMjMnMTUuMCJF!5e0!3m2!1scs!2scz!4v1234567890"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="absolute inset-0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-white/5 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Logo & Description -->
+                <div class="md:col-span-2">
+                    <h3 class="font-serif text-2xl font-bold text-gold-gradient mb-4">BARBERSHOP JASELSKÁ</h3>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Tradiční barbershop v moderním podání. Precizní střihy, kvalitní služby a nezapomenutelná atmosféra v srdci Dejvic.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-dark-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-gold-400 hover:text-dark-900 transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-dark-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-gold-400 hover:text-dark-900 transition-all duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-dark-800 rounded-full flex items-center justify-center text-gray-400 hover:bg-gold-400 hover:text-dark-900 transition-all duration-300">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Menu</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-gold-400 transition-colors">O nás</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-gold-400 transition-colors">Služby</a></li>
+                        <li><a href="#booking" class="text-gray-400 hover:text-gold-400 transition-colors">Rezervace</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-gold-400 transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Právní informace</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-gold-400 transition-colors">Ochrana soukromí</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold-400 transition-colors">Obchodní podmínky</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold-400 transition-colors">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2024 Barbershop Jaselská. Všechna práva vyhrazena.
+                </p>
+                <p class="text-gray-600 text-sm">
+                    Vytvořeno s <i class="fas fa-heart text-gold-400 mx-1"></i> v Praze
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.add('bg-dark-900/95');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.remove('bg-dark-900/95');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+                
+                // Close all others
+                document.querySelectorAll('.faq-content').forEach(item => {
+                    if (item !== content) {
+                        item.classList.remove('active');
+                    }
+                });
+                document.querySelectorAll('.faq-icon').forEach(item => {
+                    if (item !== icon) {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current
+                content.classList.toggle('active');
+                icon.classList.toggle('active');
+            });
+        });
+
+        // Form Submission Handler
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            
+            btn.textContent = 'Odesílání...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.textContent = 'Rezervace potvrzena!';
+                btn.classList.remove('from-gold-600', 'to-gold-400');
+                btn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.classList.add('from-gold-600', 'to-gold-400');
+                    btn.classList.remove('bg-green-600');
+                    this.reset();
+                    
+                    alert('Děkujeme! Vaše rezervace byla přijata. Potvrzení vám zašleme na email.');
+                }, 2000);
+            }, 1500);
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all service cards and other elements
+        document.querySelectorAll('.hover-lift').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
